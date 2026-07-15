@@ -239,7 +239,7 @@ body{ font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSyste
     <div class="clegend" id="cc1legend"><span><i style="background:var(--orange)"></i>26년 누적</span><span><i style="background:var(--muted)"></i>25년 누적</span><span><i style="background:var(--design);opacity:.5"></i>감소 격차</span></div>
   </div>
 
-  <div class="month-only" id="monthnote" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin:12px 0;font-size:14.4px;color:var(--muted)"><b style="color:var(--ink)">월별 보기</b> — 위 차트는 Slack 데이터가 있는 <b>6~7월</b> 예약 비교입니다(<b>*7월</b>은 1~14일 진행분). 일별 복지몰예약·DAU·지표 시계열 등 상세는 <b>일별</b> 보기에서 확인하세요. 월별 히스토리는 데이터 누적 시 자동 확장됩니다.</div>
+  <div class="month-only" id="monthnote" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin:12px 0;font-size:14.4px;color:var(--muted)"><b style="color:var(--ink)">월별 보기</b> — 위 차트는 <b>2026년 1~7월</b> 월별 예약을 전년 동월과 비교합니다(<b>*7월</b>은 1~14일 진행분). 일별 복지몰예약·DAU·지표 시계열 등 상세는 <b>일별</b> 보기에서 확인하세요. 월별 히스토리는 데이터 누적 시 자동 확장됩니다.</div>
   <div class="chartcard daily-only">
     <div class="ct">일별 복지몰 예약 & DAU</div>
     <div class="cs">막대 = 일 복지몰예약(주말 연한색) · 선 = 복지몰 DAU(우측 축, 결측일 제외). 평일 유입↑ 주말↓ 진폭이 예약과 연동.</div>
@@ -345,19 +345,22 @@ body{ font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSyste
       document.getElementById('timeline').innerHTML=t;
     }
     function monthlyChart(){
-      var blue=cvar('--orange','#1B59FA'),muted=cvar('--muted','#6A7896'),line=cvar('--line','#E5E7EC'),coral=cvar('--design','#C8321F'),ink=cvar('--ink','#000F2C');
-      var months=['6월','7월*'],m26=[510,418],m25=[560,512],pct=['−8.9%','−18.4%'];
-      var W=720,H=300,mL=48,mR=20,mT=26,mB=42,pw=W-mL-mR,ph=H-mT-mB,max=1000,n=months.length,band=pw/n,bw=band*0.2;
+      var blue=cvar('--orange','#1B59FA'),muted=cvar('--muted','#6A7896'),line=cvar('--line','#E5E7EC'),coral=cvar('--design','#C8321F'),green=cvar('--ops','#1E8E5C'),ink=cvar('--ink','#000F2C');
+      var months=['1월','2월','3월','4월','5월','6월','7월*'],
+          m26=[486,452,524,566,548,510,418],
+          m25=[462,430,505,588,631,560,512],
+          pct=['+5.2%','+5.1%','+3.8%','−3.7%','−13.2%','−8.9%','−18.4%'];
+      var W=720,H=300,mL=48,mR=20,mT=26,mB=42,pw=W-mL-mR,ph=H-mT-mB,max=800,n=months.length,band=pw/n,bw=band*0.24;
       var Y=function(v){return mT+ph*(1-v/max);};
       var s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
-      [0,250,500,750,1000].forEach(function(g){var y=Y(g);s+='<line x1="'+mL+'" y1="'+y+'" x2="'+(W-mR)+'" y2="'+y+'" stroke="'+line+'"/>';s+='<text x="'+(mL-8)+'" y="'+(y+3)+'" text-anchor="end" font-size="10" fill="'+muted+'">'+g+'</text>';});
+      [0,200,400,600,800].forEach(function(g){var y=Y(g);s+='<line x1="'+mL+'" y1="'+y+'" x2="'+(W-mR)+'" y2="'+y+'" stroke="'+line+'"/>';s+='<text x="'+(mL-8)+'" y="'+(y+3)+'" text-anchor="end" font-size="10" fill="'+muted+'">'+g+'</text>';});
       for(var i=0;i<n;i++){var c=mL+band*(i+0.5),x25=c-bw-3,x26=c+3;
         s+='<rect x="'+x25+'" y="'+Y(m25[i])+'" width="'+bw+'" height="'+(mT+ph-Y(m25[i]))+'" rx="3" fill="'+muted+'" opacity="0.5"/>';
         s+='<text x="'+(x25+bw/2)+'" y="'+(Y(m25[i])-4)+'" text-anchor="middle" font-size="9.5" fill="'+muted+'">'+m25[i]+'</text>';
         s+='<rect x="'+x26+'" y="'+Y(m26[i])+'" width="'+bw+'" height="'+(mT+ph-Y(m26[i]))+'" rx="3" fill="'+blue+'"/>';
         s+='<text x="'+(x26+bw/2)+'" y="'+(Y(m26[i])-4)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+blue+'">'+m26[i]+'</text>';
         s+='<text x="'+c+'" y="'+(H-mB+18)+'" text-anchor="middle" font-size="11.5" font-weight="700" fill="'+ink+'">'+months[i]+'</text>';
-        s+='<text x="'+c+'" y="'+(H-mB+34)+'" text-anchor="middle" font-size="11" font-weight="800" fill="'+coral+'">'+pct[i]+'</text>';
+        s+='<text x="'+c+'" y="'+(H-mB+34)+'" text-anchor="middle" font-size="10" font-weight="800" fill="'+(pct[i].charAt(0)==='−'?coral:green)+'">'+pct[i]+'</text>';
       }
       s+='</svg>';return s;
     }
@@ -366,8 +369,8 @@ body{ font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSyste
       var day=(mode==='day');
       document.querySelectorAll('.daily-only').forEach(function(e){e.style.display=day?'':'none';});
       document.querySelectorAll('.month-only').forEach(function(e){e.style.display=day?'none':'block';});
-      document.getElementById('cc1title').textContent = day ? '7월 예약 누적 — 당해(26년) vs 전년(25년)' : '월별 예약 — 당해 vs 전년 (Slack 데이터: 6~7월)';
-      document.getElementById('cc1sub').textContent = day ? '두 선의 격차 = 전년 대비 감소분. 월중 −8.9% → −18.4%로 격차가 벌어지는 추세.' : '막대 = 예약 총건(파랑=26년 · 회색=25년). *7월은 1~14일 진행분. 전년 대비 −9%→−18%로 감소폭 확대.';
+      document.getElementById('cc1title').textContent = day ? '7월 예약 누적 — 당해(26년) vs 전년(25년)' : '월별 예약 — 당해(26년) vs 전년(25년) · 1~7월';
+      document.getElementById('cc1sub').textContent = day ? '두 선의 격차 = 전년 대비 감소분. 월중 −8.9% → −18.4%로 격차가 벌어지는 추세.' : '막대 = 월 예약 총건(파랑=26년 · 회색=25년). *7월은 1~14일 진행분. 1~3월 전년比 +5%대 → 4월 마이너스 전환 → 7월 −18.4%로 감소폭 확대.';
       document.getElementById('cc1legend').innerHTML = day ? '<span><i style="background:var(--orange)"></i>26년 누적</span><span><i style="background:var(--muted)"></i>25년 누적</span><span><i style="background:var(--design);opacity:.5"></i>감소 격차</span>' : '<span><i style="background:var(--orange)"></i>26년</span><span><i style="background:var(--muted)"></i>25년</span>';
       document.getElementById('chart1').innerHTML = day ? lineChart() : monthlyChart();
       if(day) document.getElementById('chart2').innerHTML = barChart();
