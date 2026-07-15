@@ -776,6 +776,7 @@ body{ font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSyste
     <div class="wcard"><div class="wt">요청사항</div><div class="wd">운영건 · VOC 포함 — 전 팀 요청 큐</div><div style="display:flex;gap:6px;margin:0 0 9px;flex-wrap:wrap"><span style="font-size:12.6px;font-weight:700;background:var(--panel);color:var(--orange-d);border:1px solid var(--line);border-radius:7px;padding:2px 9px">신규 48건</span><span style="font-size:12.6px;font-weight:700;background:var(--panel);color:var(--ops);border:1px solid var(--line);border-radius:7px;padding:2px 9px">개발중 19건</span></div><a href="https://www.notion.so/carebridge/requests-db" target="_blank" rel="noopener">요청사항 관리 DB</a></div>
     <div class="wcard"><div class="wt">[7월] 복지몰 메인·기능 개선</div><div class="wd">복지몰 리뉴얼</div><div style="display:flex;gap:6px;margin:0 0 9px;flex-wrap:wrap"><span style="font-size:12.6px;font-weight:700;background:var(--panel);color:var(--sales);border:1px solid var(--line);border-radius:7px;padding:2px 9px">목표일정 8/15</span></div><a href="https://www.notion.so/carebridge/welfaremall-renewal" target="_blank" rel="noopener">리뉴얼 기획</a></div>
     <div class="wcard"><div class="wt">글로벌 사이트</div><div class="wd">의료관광 · global-care</div><div style="display:flex;gap:6px;margin:0 0 9px;flex-wrap:wrap"><span style="font-size:12.6px;font-weight:700;background:var(--panel);color:var(--sales);border:1px solid var(--line);border-radius:7px;padding:2px 9px">목표일정 7/30</span></div><a href="https://www.notion.so/carebridge/global-site-hub" target="_blank" rel="noopener">Global Site 허브</a></div>
+    <div class="wcard"><div class="wt">🎫 B2B2C 쿠폰팩 · 기업베네핏</div><div class="wd">기업 복지 쿠폰팩 신규 구축</div><div style="display:flex;gap:6px;margin:0 0 9px;flex-wrap:wrap"><span style="font-size:12.6px;font-weight:700;background:var(--panel);color:var(--ops);border:1px solid var(--line);border-radius:7px;padding:2px 9px">개발중</span><span style="font-size:12.6px;font-weight:700;background:var(--panel);color:var(--sales);border:1px solid var(--line);border-radius:7px;padding:2px 9px">목표일정 8/31</span></div><a href="https://www.notion.so/carebridge/b2b2c-coupon-pack" target="_blank" rel="noopener">쿠폰팩 기획</a></div>
   </div>
 
   <!-- ===== OPERATING SERVICES ===== -->
@@ -795,6 +796,55 @@ body{ font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSyste
     <div class="svccard"><div class="st">어드민</div><a href="https://cms.carebridge.io/cs/hospital-reservation" target="_blank" rel="noopener">cms.carebridge.io</a></div>
     <div class="svccard"><div class="st">병원관리</div><a href="https://hospital.carebridge.io/hospital/info" target="_blank" rel="noopener">hospital.carebridge.io</a></div>
     <div class="svccard"><div class="st">브랜드 홈페이지</div><a href="https://carebridge.kr/" target="_blank" rel="noopener">carebridge.kr</a></div>
-    <div class="svccard"><div class="st">글로벌 사이트</div><span class="na">미정</span></div>
+    <div class="svccard"><div class="st">글로벌 사이트</div><a href="https://global.carebridge.io/" target="_blank" rel="noopener">global.carebridge.io</a></div>
   </div>
 </div>
+
+<!-- ===== NOTION SOURCE POPUP (demo links) ===== -->
+<style>
+  .nmodal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
+    background:rgba(10,16,30,.5);backdrop-filter:blur(2px);padding:20px}
+  .nmodal.open{display:flex}
+  .nmodal-box{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:16px;
+    max-width:380px;width:100%;padding:26px 24px 22px;box-shadow:0 20px 60px rgba(0,0,0,.28);position:relative;text-align:center}
+  .nmodal-x{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);font-size:22px;line-height:1;cursor:pointer}
+  .nmodal-ic{width:52px;height:52px;border-radius:14px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;
+    font-size:26px;background:var(--orange-soft);border:1px solid var(--line)}
+  .nmodal-t{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+  .nmodal-s{font-size:13.6px;line-height:1.6;color:var(--muted);margin-bottom:6px}
+  .nmodal-tag{display:inline-block;font-size:12px;font-weight:700;color:var(--orange-d);background:var(--orange-soft);
+    border:1px solid var(--line);border-radius:7px;padding:3px 10px;margin:8px 0 16px;font-family:ui-monospace,Menlo,monospace}
+  .nmodal-ok{background:var(--orange);color:#fff;border:none;border-radius:10px;padding:9px 22px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+  .nmodal-ok:hover{filter:brightness(1.05)}
+</style>
+<div id="notionModal" class="nmodal" role="dialog" aria-modal="true" aria-labelledby="nmodalT">
+  <div class="nmodal-box">
+    <button class="nmodal-x" type="button" aria-label="닫기">×</button>
+    <div class="nmodal-ic">🔗</div>
+    <div class="nmodal-t" id="nmodalT">실 데이터는 노션에서 관리됩니다</div>
+    <div class="nmodal-tag" id="nmodalLink">Notion</div>
+    <div class="nmodal-s">이 대시보드는 데모 화면입니다. 요청사항·연락처·매출 등 실제 데이터는 <b>Notion 워크스페이스</b>에서 관리·연동됩니다.</div>
+    <button class="nmodal-ok" type="button">확인</button>
+  </div>
+</div>
+<script>
+(function(){
+  var modal=document.getElementById('notionModal'),
+      linkTag=document.getElementById('nmodalLink');
+  function open(label){ if(label) linkTag.textContent=label; modal.classList.add('open'); }
+  function close(){ modal.classList.remove('open'); }
+  // 외부(http) 링크 클릭 시 실제 이동 대신 노션 안내 팝업
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a');
+    if(!a) return;
+    var href=a.getAttribute('href')||'';
+    if(!/^https?:\/\//i.test(href)) return; // 내부 앵커(#)는 정상 동작
+    e.preventDefault();
+    open((a.textContent||'').trim());
+  });
+  modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
+  modal.querySelector('.nmodal-x').addEventListener('click',close);
+  modal.querySelector('.nmodal-ok').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
